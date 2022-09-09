@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche produit{% endblock %}
+{% block h1 %}Fiche du produit{% endblock %}
+
+{% block body %}
+
+    <ul class="list-group">
+            <li class="list-group-item">
+                <div class="col-2">Titre</div>
+                <div class="col-10">{{ produit.titre }}</div>
+            </li>
+            <li class="list-group-item">
+                <div class="col-2">Id</div>
+                <div class="col-10">{{ produit.id }}</div>
+            </li>
+            <li class="list-group-item">
+                <div class="col-2">Reference</div>
+                <div class="col-10">{{ produit.reference }}</div>
+            </li>
+            <li class="list-group-item">
+                <div class="col-2">Catégorie</div>
+                <div class="col-10">{{ produit.categorie }}</div>
+            </li>
+            <li class="list-group-item">
+                <div class="col-2">Déscription</div>
+                <div class="col-10">{{ produit.description }}</div>
+            </li>
+            <li class="list-group-item">
+                <div class="col-2">Prix</div>
+                <div class="col-10">{{ produit.prix }}</div>
+            </li>
+            <li class="list-group-item">
+                <div class="col-2">Stock</div>
+                <div class="col-10">{{ produit.stock }}</div>
+            </li>
+            <li class="list-group-item">
+                <div class="col-2">Photo</div>
+                <div class="col-10">
+                 <img src="{{ image_path ~ produit.photo }}" alt="{{ produit.photo }}">
+                </div>
+            </li>
+
+            <li class="list-group-item">
+                <div class="col-2">Popularité</div>
+                <div class="col-10">
+                <p>Le produit a été commandé {{ produit.details|length }} fois !</p>
+                    {# {% set nb = 0 %}
+                    {% for d in produit.details %}
+                        {% set nb = nb + d.quantite %}
+                    {% endfor %} #}
+                    <p> Le nombre de produits commandés : {{ nb }} </p>
+                </div>
+            </li>
+    </ul>
+
+    <a href="{{ path('app_admin_produit_index') }}"><i class="fa fa-reply"></i> Retour à la liste</a>
+
+    <a href="{{ path('app_admin_produit_edit', {'id': produit.id}) }}">edit</a>
+
+    {{ include('admin/produit/_delete_form.html.twig') }}
+{% endblock %}

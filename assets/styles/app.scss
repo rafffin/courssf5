@@ -1,0 +1,13 @@
+$primary: #3b4f83;
+$success: #058928;
+$info: o#0066ff;
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import "~bootstrap/scss/bootstrap";
+
+body {
+  background-color: lightgray;
+}
+.vignette {
+  height: 100px;
+  width: auto;
+}

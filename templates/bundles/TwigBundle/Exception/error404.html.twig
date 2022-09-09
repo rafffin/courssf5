@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block tittle %}Erreur 404 {% endblock %}
+
+{% block h1 %}404: Page non trouvée{% endblock %}
+
+{% block body %}
+    <div class="alet alert-danger">
+           Ce chemin n'existe pas ! <i> Vade retro</i>
+    </div> 
+    <a href="{{ Path('add_home') }}" class= "btn btn-primery"> Retour à la </a>
+{% endblock %}

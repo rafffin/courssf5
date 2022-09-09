@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande{% endblock %}
+
+{% block h1 %}Détail de la commande{% endblock %}
+
+{% block body %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ commande.id }}</td>
+            </tr>
+            <tr>
+                <th>Client</th>
+                <td>
+                
+                {% if commande.client.nom is not empty or commande. client.prenom %}  
+                    {{ commande.client.prenom}} {{ commande.client.nom}}
+                {% else%}
+                    {{ commande.client.pseudo}}
+                {% endif %}
+            </td>     
+
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ commande.dateEnregistrement ? 'le ' ~ commande.dateEnregistrement|date('d/m/Y à H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ commande.etat }}</td>
+            </tr>
+
+            <tr>
+                <th>Détails de la commande</th>
+                <td>
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Identifiant</th>
+                                <th>Désignation</th>
+                                <th>Qté</th>
+                                <th>Sous-total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cmd in app.user.  %}
+                                <tr>
+
+                                    <td>{{ detail.produit.id }}</td>
+                                    <td> {{ detail.produit.titre }}</td>
+                                    <td>{{ detail.quantite }}</td>
+                                    <td>{{ detail.quantite * detail.prix }} €</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                        
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Montant</th>
+                <td>{{ commande.montant }} €</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <a href="{{ path('app_admin_commande_index') }}">back to list</a>
+
+    <a href="{{ path('app_admin_commande_edit', {'id': commande.id}) }}">edit</a>
+
+    {{ include('admin/commande/_delete_form.html.twig') }}
+{% endblock %}

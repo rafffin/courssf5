@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit{% endblock %}
+
+{% block h1 %}Fiche produit{% endblock %}
+
+{% block body %}
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ produit.id }}</td>
+            </tr>
+            <tr>
+                <th>Référence</th>
+                <td>{{ produit.reference }}</td>
+            </tr>
+            <tr>
+                <th>Catégorie</th>
+                <td>{{ produit.categorie }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ produit.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ produit.description }}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td>
+                    <img src="{{ image_path ~ produit.photo }}" alt="">
+                    
+                </td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ produit.prix }} €</td>
+            </tr>
+            <tr>
+                <th>Stock</th>
+                <td>{{ produit.stock }}</td>
+            </tr>
+
+            <tr>
+                <th>Popularité</th>
+                <td>
+                    <p>Le produit a été commandé {{ produit.details|length  }} fois</p>
+                    {# {% set nb = 0 %}
+                    {% for d in produit.details %}
+                        {% set nb = nb + d.quantite %}
+                    {% endfor %} #}
+                    <p>Le nombre de produits commandés : {{ nb }}</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_produit_index') }}"><i class="fa fa-reply"></i> Retour à la liste</a>
+
+    <a href="{{ path('app_admin_produit_edit', {'id': produit.id}) }}">edit</a>
+
+    {{ include('admin/produit/_delete_form.html.twig') }}
+{% endblock %}

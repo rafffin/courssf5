@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+
+
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+
+            {% if app.request.pathinfo starts with '/admin' %}
+                {{ encore_entry_link_tags('admin') }}
+            {% endif %}
+
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+
+            {% if app.request.pathinfo starts with '/admin' %}
+                {{ encore_entry_script_tags('admin') }}
+            {% endif %}
+            
+        {% endblock %}
+    </head>
+    <body>
+        <div class="container">
+            {% block nav %}
+                {{ include("nav.html.twig") }}
+            {% endblock %}
+
+            {{ include("messages.html.twig") }}
+
+            <div id="main">
+                <h1>{% block h1 %}Bienvenue à l'e-boutik'{% endblock %}</h1>
+
+                {% block body %}
+                    <p>Ceci est le contenu de la balise <code>block body</code> du fichier 
+                        <mark>base.html.twig</mark>
+                    </p>
+                    <p>Le nombre est {{ nombre }}</p>
+                    <p>Bonjour M. {{ nom }}</p>
+                {% endblock %}
+            </div>
+
+
+            <footer>
+                {% block footer %}
+                    <p>Ceci est le footer de la page</p>
+                {% endblock %}
+            </footer>
+        </div>
+    </body>
+</html>
+
+{# COMMENTAIRES #}
+{# 
+    - On ne met jamais de balise PHP dans un fichier Twig 
+    - L'équivalent de la balise PHP echo <?= ?> en Twig est : {{ }}
+    - Les balises twig ressemblent aux balises HTML
+        ouverture : {% 𝙗𝙖𝙡𝙞𝙨𝙚 %}
+        fermeture : {% end𝙗𝙖𝙡𝙞𝙨𝙚 %}
+
+#}
